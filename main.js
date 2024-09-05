@@ -5,4 +5,6 @@ const tree = new Tree([
 ]);
 
 tree.insert(105);
+tree.deleteItem(tree.root, 25);
+tree.deleteItem(tree.root, 6345);
 tree.prettyPrint(tree.root);

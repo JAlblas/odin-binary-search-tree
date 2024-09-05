@@ -53,6 +53,42 @@ class Tree {
 
     return node;
   }
+
+  getSuccessor(node) {
+    node = node.right;
+    while (node !== null && node.left !== null) {
+      node = node.left;
+    }
+    return node;
+  }
+
+  deleteItem(root, value) {
+    if (root === null) {
+      return root;
+    }
+
+    // If key to be searched is in a subtree
+    if (root.data > value) {
+      root.left = this.deleteItem(root.left, value);
+    } else if (root.data < value) {
+      root.right = this.deleteItem(root.right, value);
+    } else {
+      // If root matches with the given key
+
+      // Cases when root has 0 children or
+      // only right child
+      if (root.left === null) return root.right;
+
+      // When root has only left child
+      if (root.right === null) return root.left;
+
+      // When both children are present
+      let successor = this.getSuccessor(root);
+      root.data = successor.data;
+      root.right = this.deleteItem(root.right, successor.data);
+    }
+    return root;
+  }
 }
 
 export default Tree;
